@@ -1,0 +1,39 @@
+{
+  "name": "defillama-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for DeFi Llama — free DeFi TVL, yields, stablecoins, bridges, DEX, and fee data for AI assistants",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "defillama-mcp-server": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc && node dist/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "defillama",
+    "defi",
+    "tvl",
+    "yields",
+    "stablecoins",
+    "bridges",
+    "dex",
+    "ai",
+    "claude",
+    "cursor"
+  ],
+  "author": "Nova",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "@types/node": "^20.0.0"
+  }
+}
