@@ -1,7 +1,7 @@
 {
   "name": "defillama-mcp-server",
   "version": "1.0.0",
-  "description": "MCP server for DeFi Llama — free DeFi TVL, yields, stablecoins, bridges, DEX, and fee data for AI assistants",
+  "description": "MCP server for DeFi Llama \u2014 free DeFi TVL, yields, stablecoins, bridges, DEX, and fee data for AI assistants",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -35,5 +35,17 @@
   "devDependencies": {
     "typescript": "^5.5.0",
     "@types/node": "^20.0.0"
+  },
+  "mcpName": "io.github.friendlygeorge/defillama-mcp-server",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/friendlygeorge/defillama-mcp-server.git"
+  },
+  "homepage": "https://github.com/friendlygeorge/defillama-mcp-server#readme",
+  "bugs": {
+    "url": "https://github.com/friendlygeorge/defillama-mcp-server/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
