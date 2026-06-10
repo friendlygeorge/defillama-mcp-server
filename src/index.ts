@@ -63,7 +63,7 @@ const server = new McpServer({
 // ── Tool: search_protocols ──
 server.tool(
   "search_protocols",
-  "Search DeFi protocols by name. Returns top results with TVL, chains, and category.",
+  "Search DeFi protocols by name or symbol. Returns matching protocols ranked by TVL, each with name, symbol, TVL, category, chains, and slug. Use the slug in get_protocol_tvl for detailed data.",
   {
     query: z.string().describe("Search term (e.g. 'aave', 'uniswap', 'lido')"),
     limit: z.number().optional().default(10).describe("Max results to return (default 10)"),
@@ -111,7 +111,7 @@ server.tool(
 // ── Tool: get_protocol_tvl ──
 server.tool(
   "get_protocol_tvl",
-  "Get detailed TVL breakdown for a specific DeFi protocol (chain distribution, TVL history, category, description).",
+  "Get detailed TVL breakdown for a specific DeFi protocol by slug. Returns current TVL, chain-by-chain TVL distribution, 24h/7d TVL change percentages, category, description, website, and sampled TVL history. Use search_protocols to find the slug first.",
   {
     slug: z.string().describe("Protocol slug (e.g. 'aave', 'uniswap', 'lido'). Use search_protocols to find slugs."),
   },
@@ -173,7 +173,7 @@ server.tool(
 // ── Tool: get_tvl_by_chain ──
 server.tool(
   "get_tvl_by_chain",
-  "Get total TVL for a specific chain (Ethereum, Arbitrum, Base, Solana, etc.) plus chain-level token breakdown.",
+  "Get total TVL for a specific blockchain (Ethereum, Arbitrum, Base, Solana, BSC, Polygon, etc.). Returns chain-level TVL, native token symbol, CoinGecko/CMC IDs, and top 10 tokens on that chain ranked by TVL. Useful for comparing chain activity and identifying where capital is concentrated.",
   {
     chain: z.string().describe("Chain name (e.g. 'Ethereum', 'Arbitrum', 'Base', 'Solana', 'BSC', 'Polygon')"),
   },
@@ -230,7 +230,7 @@ server.tool(
 // ── Tool: get_yields ──
 server.tool(
   "get_yields",
-  "Get yield/APY data for lending pools and staking across DeFi protocols. Filter by chain, project, or min TVL.",
+  "Search yield/APY opportunities across DeFi lending pools and staking. Returns pool name, chain, project, APY (with base + reward breakdown), TVL, and stablecoin indicator. Filter by chain, project, minimum TVL, or minimum APY. Impermanent-loss pools excluded by default.",
   {
     chain: z.string().optional().describe("Filter by chain (e.g. 'Ethereum', 'Arbitrum', 'Base', 'Solana')"),
     project: z.string().optional().describe("Filter by project (e.g. 'Aave', 'Lido', 'Compound')"),
@@ -299,7 +299,7 @@ server.tool(
 // ── Tool: get_stablecoins ──
 server.tool(
   "get_stablecoins",
-  "Get stablecoin market cap data and rankings (circulating supply, chains, prices).",
+  "Get stablecoin market data ranked by circulating supply. Returns symbol, peg type, circulating market cap, price, and number of chains each stablecoin is deployed on. Useful for comparing stablecoin adoption and identifying multi-chain stablecoins.",
   {
     limit: z.number().optional().default(25).describe("Max results (default 25)"),
   },
@@ -343,7 +343,7 @@ server.tool(
 // ── Tool: get_bridges ──
 server.tool(
   "get_bridges",
-  "Get bridge TVL and volume data — cross-chain bridges ranked by total value locked.",
+  "Get cross-chain bridge data ranked by total value locked. Returns bridge name, TVL, 24h volume, and 7d volume. Useful for comparing bridge liquidity and identifying which bridges handle the most cross-chain capital flow.",
   {
     limit: z.number().optional().default(20).describe("Max results (default 20)"),
   },
@@ -387,7 +387,7 @@ server.tool(
 // ── Tool: get_dex_volumes ──
 server.tool(
   "get_dex_volumes",
-  "Get DEX trading volumes across chains — decentralized exchanges ranked by 24h/7d volume.",
+  "Get decentralized exchange trading volumes ranked by 24h volume. Returns DEX name, 24h/7d/30d volume, and 24h change percentage. Useful for comparing DEX activity, identifying volume trends, and finding which exchanges dominate on-chain trading.",
   {
     limit: z.number().optional().default(25).describe("Max results (default 25)"),
   },
@@ -431,7 +431,7 @@ server.tool(
 // ── Tool: get_protocol_fees ──
 server.tool(
   "get_protocol_fees",
-  "Get protocol fee and revenue data — protocols ranked by 24h/7d/30d fees and revenue.",
+  "Get protocol fee and revenue data ranked by 24h fees. Returns protocol name, 24h/7d/30d fees, and 24h revenue where available. Useful for comparing protocol economics, identifying which DeFi protocols generate the most fees, and analyzing revenue trends.",
   {
     limit: z.number().optional().default(25).describe("Max results (default 25)"),
   },
