@@ -2,9 +2,13 @@
 
 > An MCP server for [DeFi Llama](https://defillama.com) — connect any MCP-compatible client to free DeFi protocol data.
 
+[![npm version](https://img.shields.io/npm/v/@supernova123/defillama-mcp-server)](https://www.npmjs.com/package/@supernova123/defillama-mcp-server)
+[![npm downloads](https://img.shields.io/npm/dm/@supernova123/defillama-mcp-server)](https://www.npmjs.com/package/@supernova123/defillama-mcp-server)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![MCP Compatible](https://img.shields.io/badge/MCP-compatible-blueviolet)](https://modelcontextprotocol.io)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue)](https://www.typescriptlang.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Claude Desktop](https://img.shields.io/badge/Claude%20Desktop-ready-orange)](https://claude.ai/download)
+[![Cursor](https://img.shields.io/badge/Cursor-compatible-blue)](https://cursor.sh)
 
 ## What is this?
 
@@ -34,21 +38,9 @@ Use it with **Claude Desktop**, **Cursor**, **Windsurf**, **Cline**, **Continue*
 
 ## Quick Start
 
-### 1. Install
+### 1. Add to your MCP client
 
-```bash
-npm install -g defillama-mcp-server
-```
-
-Or run directly with npx:
-
-```bash
-npx -y defillama-mcp-server
-```
-
-### 2. Configure your MCP client
-
-Add to your MCP client config (e.g. `claude_desktop_config.json`):
+Add this to your MCP client config (e.g. `claude_desktop_config.json`):
 
 ```json
 {
@@ -61,19 +53,9 @@ Add to your MCP client config (e.g. `claude_desktop_config.json`):
 }
 ```
 
-Or with global install:
+That's it. npx downloads and runs it automatically. No API key, no install step.
 
-```json
-{
-  "mcpServers": {
-    "defillama": {
-      "command": "defillama-mcp-server"
-    }
-  }
-}
-```
-
-### 3. Use it
+### 2. Use it
 
 Ask your AI assistant things like:
 
@@ -124,6 +106,49 @@ Ethereum — Chain TVL
 - **WBTC** (Wrapped BTC): $2.89B
 - **WSTETH** (Wrapped stETH): $2.34B
 ```
+
+## Use Cases
+
+### DeFi Research
+"Search for Aave and show me the chain breakdown" — find protocols, compare TVL across chains, and understand where value is concentrated. Works with any protocol in DeFi Llama's database of 3,000+ projects.
+
+### Yield Optimization
+"Show me the highest yield stablecoin pools on Base with at least $10M TVL" — filter yield opportunities by chain, project, minimum TVL, and asset type. Find safe yields without hunting through dashboards.
+
+### Chain Analysis
+"What's the total TVL on Arbitrum?" — get chain-level stats including top tokens by TVL. Useful for understanding where liquidity is flowing and which chains are growing.
+
+### Stablecoin Intelligence
+"List the top 5 stablecoins by market cap" — track stablecoin market caps, circulating supply, and price deviations. Essential for understanding DeFi's dollar-denominated liquidity.
+
+### Cross-Chain Monitoring
+"Which bridges have the most TVL?" — monitor cross-chain bridge activity and volume. Track which bridges are gaining or losing share.
+
+### Protocol Revenue Tracking
+"What are the protocols with the most fees?" — analyze protocol fee generation and revenue. Useful for fundamental analysis and comparing protocol economics.
+
+## Security
+
+- **No API key required** — uses DeFi Llama's free public API. No authentication needed.
+- **Read-only** — only fetches public DeFi data from DeFi Llama's API. No writes, no mutations.
+- **No local file access** — does not read or write any files on your machine.
+- **No shell access** — does not execute commands or spawn processes.
+- **Rate-limited** — automatically caps requests to be a polite API citizen.
+- **Open source** — MIT licensed. Inspect the code at [GitHub](https://github.com/friendlygeorge/defillama-mcp-server).
+
+## Troubleshooting
+
+### "Protocol not found" errors
+Use `search_protocols` first to find the correct DeFi Llama slug. Protocol slugs are lowercase with hyphens (e.g. `aave-v3`, `lido`), not ticker symbols.
+
+### Slow responses
+DeFi Llama's `/protocols` and `/pools` endpoints return multi-MB responses. The server throttles to ~2 calls/second. For large queries, results may take 1-2 seconds.
+
+### Server won't start
+Make sure Node.js 18+ is installed: `node --version`. If using npx, ensure npm is up to date: `npm install -g npm@latest`.
+
+### MCP client can't connect
+Verify the config path is correct. Claude Desktop uses `~/Library/Application Support/Claude/claude_desktop_config.json` on macOS and `%APPDATA%\Claude\claude_desktop_config.json` on Windows. Restart the client after config changes.
 
 ## Requirements
 
