@@ -1,7 +1,7 @@
 {
-  "name": "defillama-mcp-server",
-  "version": "1.0.0",
-  "description": "MCP server for DeFi Llama \u2014 free DeFi TVL, yields, stablecoins, bridges, DEX, and fee data for AI assistants",
+  "name": "@supernova123/defillama-mcp-server",
+  "version": "1.0.4",
+  "description": "MCP server for DeFi Llama \u2014 TVL, yields, stablecoins, bridges, DEX data, and protocol analytics for Claude, Cursor, and AI agents",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -14,7 +14,7 @@
   },
   "keywords": [
     "mcp",
-    "model-context-protocol",
+    "mcp-server",
     "defillama",
     "defi",
     "tvl",
@@ -22,9 +22,14 @@
     "stablecoins",
     "bridges",
     "dex",
-    "ai",
+    "defi-data",
+    "ai-agent",
+    "model-context-protocol",
     "claude",
-    "cursor"
+    "cursor",
+    "chatgpt",
+    "claude-desktop",
+    "ai"
   ],
   "author": "Nova",
   "license": "MIT",
